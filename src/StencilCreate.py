@@ -1,6 +1,6 @@
 import cv2
-import numpy as np
 import glob
+import numpy as np
 from pathlib import Path
 
 '''
@@ -32,7 +32,9 @@ stencil_path = "/path/to/stencil/stencil.png"
 def get_bw_image(image_path):
     #remove all pixels from alpha_image that is different in image
     img = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
-    if(img.shape[2] == 4):
+    if len(img.shape) == 2:
+        print("Image already greyscale")
+    elif (img.shape[2] == 4):
         img = cv2.cvtColor(img, cv2.COLOR_BGRA2GRAY)
     elif(img.shape[2] == 3):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
